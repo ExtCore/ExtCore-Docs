@@ -1,7 +1,7 @@
 ﻿Basic Concepts
 ==============
 
-Detailed information will be be available shortly.
-
 .. toctree::
    :titlesonly:
+
+   unified_extension_structure
