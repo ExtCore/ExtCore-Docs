@@ -12,4 +12,5 @@ All you need to do to have modular and extendable web application is:
 .. toctree::
    :titlesonly:
 
+   walkthrough
    samples
