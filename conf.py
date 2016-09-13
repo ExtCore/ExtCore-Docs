@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# ExtCore documentation build configuration file, created by
+# ExtCore Framework documentation build configuration file, created by
 # sphinx-quickstart on Thu Aug 27 14:17:59 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -46,7 +46,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ExtCore'
+project = u'ExtCore Framework'
 copyright = u'2015, Dmitry Sikorsky'
 author = u'Dmitry Sikorsky'
 
@@ -237,7 +237,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'ExtCore.tex', u'ExtCore Documentation',
+  (master_doc, 'ExtCore.tex', u'ExtCore Framework Documentation',
    u'Dmitry Sikorsky', 'manual'),
 ]
 
@@ -267,7 +267,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'platformus', u'ExtCore Documentation',
+    (master_doc, 'ExtCore', u'ExtCore Framework Documentation',
      [author], 1)
 ]
 
