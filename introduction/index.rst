@@ -27,14 +27,14 @@ ExtCore general packages are:
 * ExtCore.WebApplication.
 
 ExtCore.Infrastructure
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 This package describes such basic shared things as ``IExtension`` interface and its abstract implementation –
 ``ExtensionBase`` class. Also it contains ``ExtensionManager`` class – the central element in the ExtCore types
-discovering machanism. Most of the modules or extensions need this package as dependency.
+discovering mechanism. Most of the modules or extensions need this package as dependency.
 
 ExtCore.WebApplication
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 This package describes basic web application behavior with ``Startup`` class. This behavior includes modules and
 extensions assemblies discovering, ``ExtensionManager`` initialization etc. Any ExtCore web application must
@@ -51,14 +51,14 @@ ExtCore basic extensions are:
 * ExtCore.Mvc.
 
 ExtCore.Data
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
 By default, ExtCore doesn’t know anything about data and storage, but you can use ExtCore.Data extension to have
 unified approach to working with data and single storage context among all the extensions. Currently it supports
 Microsoft SQL Server, PostgreSql and SQLite, but it is very easy to add another storage support.
 
 ExtCore.Mvc
-^^^^^^^^^^^
+~~~~~~~~~~~
 
 By default, ExtCore web applications are not MVC ones. MVC support is provided for them by ExtCore.Mvc extension.
 This extension initializes MVC, makes it possible to use controllers, view components, views (added as resources
