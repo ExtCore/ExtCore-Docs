@@ -36,11 +36,11 @@ discovering mechanism. Most of the modules or extensions need this package as de
 ExtCore.WebApplication
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This package describes basic web application behavior with ``Startup`` class. This behavior includes modules and
-extensions assemblies discovering, ``ExtensionManager`` initialization etc. Any ExtCore web application must
-inherit its ``Startup`` class from ``ExtCore.WebApplication.Startup`` class in order to work properly. Also this
-package contains ``IAssemblyProvider`` interface and its implementation – ``AssemblyProvider`` class which is
-used to discover assemblies and might be replaced with the custom one.
+This package describes basic web application behavior with ``Startup`` abstract class. This behavior includes
+modules and extensions assemblies discovering, ``ExtensionManager`` initialization etc. Any ExtCore web
+application must inherit its ``Startup`` class from ``ExtCore.WebApplication.Startup`` class in order to work
+properly. Also this package contains ``IAssemblyProvider`` interface and its implementation –
+``AssemblyProvider`` class which is used to discover assemblies and might be replaced with the custom one.
 
 Basic Extensions
 ----------------
