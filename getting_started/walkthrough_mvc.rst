@@ -159,7 +159,7 @@ project.json file and add ``buildOptions`` section there:
 It is enough for now. Rebuild the solution and copy ExtCoreExtension.dll file to the extensions folder
 of the ExtCoreWebApplication. Run the web application:
 
-.. image:: /images/walkthrough_simple/1.png
+.. image:: /images/walkthrough_mvc/1.png
 
 We can see that controller and views are resolved. Cool! Now let’s add some style to the our views.
 Create default.css file inside the /Styles folder (you need to create it too):
@@ -188,7 +188,7 @@ Note that resources have flat structure inside the assemblies so we need to repl
 
 Rebuild the solution again and replace ExtCoreExtension.dll file, run the web application:
 
-.. image:: /images/walkthrough_simple/2.png
+.. image:: /images/walkthrough_mvc/2.png
 
 As we can see, the text turns red. It means that everything works as expected. In the next walkthroughs
 we will see how to work with the storage.
