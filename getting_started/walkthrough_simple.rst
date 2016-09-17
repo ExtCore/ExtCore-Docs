@@ -16,7 +16,7 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Open file project.json and add dependencies to ExtCore.WebApplication version 1.0.0-beta1 and
+Open project.json file and add dependencies to ExtCore.WebApplication version 1.0.0-beta1 and
 Microsoft.Extensions.Configuration.Json version 1.0.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
@@ -35,7 +35,7 @@ project.json file should look like this:
       }
     }
 
-Create file config.json in the project root. We will use this file to provide configuration
+Create config.json file in the project root. We will use this file to provide configuration
 parameters to ExtCore (such as path of the extensions folder). Now it should contain only one
 parameter ``Extensions:Path`` and look like this:
 
@@ -49,7 +49,7 @@ parameter ``Extensions:Path`` and look like this:
       }
     }
 
-Open file Startup.cs and modify your ``Startup`` class as follows:
+Open Startup.cs file and modify your ``Startup`` class as follows:
 
 * inherit it from ``ExtCore.WebApplication.Startup`` class;
 * add constructor with ``IServiceProvider`` parameter and pass this parameter to the constructor of the parent class;
@@ -99,7 +99,7 @@ Create new .NET Core class library project:
 
 .. image:: /images/walkthrough_simple/3.png
 
-Open file project.json and add dependencies to ExtCore.Infrastructure version 1.0.0-beta1. After that
+Open project.json file and add dependencies to ExtCore.Infrastructure version 1.0.0-beta1. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
@@ -111,7 +111,7 @@ Open file project.json and add dependencies to ExtCore.Infrastructure version 1.
     }
 
 Create ``Extension`` class and inherit it from ``ExtCore.Infrastructure.ExtensionBase``. Override
-property ``Name`` in this way:
+``Name`` property in this way:
 
 .. code-block:: c#
 
@@ -131,7 +131,7 @@ Put it Together
 We have two options to make our extension available in main web application:
 
 * add direct dependency on ExtCoreExtension in project.json file of ExtCoreWebApplication;
-* put compiled ExtCoreExtension.dll file to extensions folder of the ExtCoreWebApplication that is configured in config.json.
+* put compiled ExtCoreExtension.dll file to extensions folder of the ExtCoreWebApplication that is configured in config.json file.
 
 While the first option is too obvious let’s try the second one. Copy the ExtCoreExtension.dll file
 to the extensions folder of the ExtCoreWebApplication and modify ``Configure`` method of ``Startup`` class
