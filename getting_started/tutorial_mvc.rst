@@ -1,8 +1,8 @@
-﻿Walkthrough: Create ExtCore-Based MVC Web Application
+﻿Tutorial: Create ExtCore-Based MVC Web Application
 =====================================================
 
 We are going to create modular and extendable ExtCore-based MVC web application. Please follow
-`this walkthrough <http://docs.extcore.net/en/latest/getting_started/walkthrough_simple.html>`_
+`this tutorial <http://docs.extcore.net/en/latest/getting_started/tutorial_simple.html>`_
 to create simple ExtCore-based web application first. We will use it as a base.
 
 So, we have the main web application and extension projects. They work but currently don’t
@@ -159,7 +159,7 @@ project.json file and add ``buildOptions`` section there:
 It is enough for now. Rebuild the solution and copy ExtCoreExtension.dll file to the extensions folder
 of the ExtCoreWebApplication. Run the web application:
 
-.. image:: /images/walkthrough_mvc/1.png
+.. image:: /images/tutorial_mvc/1.png
 
 We can see that controller and views are resolved. Cool! Now let’s add some style to the our views.
 Create default.css file inside the /Styles folder (you need to create it too):
@@ -188,7 +188,7 @@ Note that resources have flat structure inside the assemblies so we need to repl
 
 Rebuild the solution again and replace ExtCoreExtension.dll file, run the web application:
 
-.. image:: /images/walkthrough_mvc/2.png
+.. image:: /images/tutorial_mvc/2.png
 
-As we can see, the text turns red. It means that everything works as expected. In the next walkthroughs
+As we can see, the text turns red. It means that everything works as expected. In the next tutorials
 we will see how to work with the storage.

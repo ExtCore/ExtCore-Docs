@@ -5,6 +5,7 @@
    :titlesonly:
 
    samples
-   walkthrough_simple
-   walkthrough_mvc
-   walkthrough_data
+   tutorial_simple
+   tutorial_mvc
+   tutorial_data
+   tutorial_extension

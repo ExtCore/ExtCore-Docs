@@ -1,4 +1,4 @@
-﻿Walkthrough: Create Simple ExtCore-Based Web Application
+﻿Tutorial: Create Simple ExtCore-Based Web Application
 ========================================================
 
 We are going to create simple modular and extendable ExtCore-based web application. First of all,
@@ -10,9 +10,9 @@ Create Main Web Application
 
 Now let’s start Visual Studio and create new ASP.NET Core project:
 
-.. image:: /images/walkthrough_simple/1.png
+.. image:: /images/tutorial_simple/1.png
 
-.. image:: /images/walkthrough_simple/2.png
+.. image:: /images/tutorial_simple/2.png
 
 Empty project is created.
 
@@ -97,7 +97,7 @@ Create Extension
 
 Create new .NET Core class library project:
 
-.. image:: /images/walkthrough_simple/3.png
+.. image:: /images/tutorial_simple/3.png
 
 Open project.json file and add dependencies to ExtCore.Infrastructure version 1.0.0-beta1. After that
 ``dependencies`` section of your project.json file should look like this:
@@ -151,8 +151,8 @@ in next way:
 
 If we run our web application we will have following result:
 
-.. image:: /images/walkthrough_simple/4.png
+.. image:: /images/tutorial_simple/4.png
 
-It may not look very impressive, but it’s only the beginning! In the next walkthroughs we will see
+It may not look very impressive, but it’s only the beginning! In the next tutorials we will see
 how extensions may execute their own code in ``ConfigureServices`` and ``Configure`` methods, how
 to use MVC and how to work with storage.
