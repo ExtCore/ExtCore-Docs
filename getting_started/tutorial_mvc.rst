@@ -1,5 +1,5 @@
 ﻿Tutorial: Create ExtCore-Based MVC Web Application
-=====================================================
+==================================================
 
 We are going to create modular and extendable ExtCore-based MVC web application. Please follow
 `this tutorial <http://docs.extcore.net/en/latest/getting_started/tutorial_simple.html>`_
@@ -12,15 +12,15 @@ using extension methods ``AddMvc`` and ``UseMvc``. With ExtCore it is even a bit
 Modify Main Web Application
 ---------------------------
 
-Open project.json file and add dependency to ExtCore.Mvc version 1.0.0-beta1. After that
+Open project.json file and add dependency to ExtCore.Mvc version 1.0.0-beta2. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Mvc": "1.0.0-beta1",
-      "ExtCore.WebApplication": "1.0.0-beta1",
+      "ExtCore.Mvc": "1.0.0-beta2",
+      "ExtCore.WebApplication": "1.0.0-beta2",
       "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
       "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
       "Microsoft.Extensions.Configuration.Json": "1.0.0",
@@ -80,7 +80,7 @@ on ExtCore.Mvc.Infrastructure (same version). Then add dependency on Microsoft.A
     :emphasize-lines: 2,3
 
     "dependencies": {
-      "ExtCore.Mvc.Infrastructure": "1.0.0-beta1",
+      "ExtCore.Mvc.Infrastructure": "1.0.0-beta2",
       "Microsoft.AspNetCore.Mvc": "1.0.0",
       "NETStandard.Library": "1.6.0"
     }

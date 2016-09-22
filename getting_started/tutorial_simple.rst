@@ -1,5 +1,5 @@
 ﻿Tutorial: Create Simple ExtCore-Based Web Application
-========================================================
+=====================================================
 
 We are going to create simple modular and extendable ExtCore-based web application. First of all,
 if you are new to ASP.NET Core please visit `this page <https://www.microsoft.com/net/core>`_. You
@@ -16,7 +16,7 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Open project.json file and add dependencies to ExtCore.WebApplication version 1.0.0-beta1 and
+Open project.json file and add dependencies to ExtCore.WebApplication version 1.0.0-beta2 and
 Microsoft.Extensions.Configuration.Json version 1.0.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
@@ -24,7 +24,7 @@ project.json file should look like this:
     :emphasize-lines: 2,5
 
     "dependencies": {
-      "ExtCore.WebApplication": "1.0.0-beta1",
+      "ExtCore.WebApplication": "1.0.0-beta2",
       "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
       "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
       "Microsoft.Extensions.Configuration.Json": "1.0.0",
@@ -99,14 +99,14 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_simple/3.png
 
-Open project.json file and add dependencies to ExtCore.Infrastructure version 1.0.0-beta1. After that
+Open project.json file and add dependencies to ExtCore.Infrastructure version 1.0.0-beta2. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Infrastructure": "1.0.0-beta1",
+      "ExtCore.Infrastructure": "1.0.0-beta2",
       "NETStandard.Library": "1.6.0"
     }
 

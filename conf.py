@@ -237,7 +237,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'ExtCore.tex', u'ExtCore Framework Documentation',
+  (master_doc, 'ExtCore.tex', u'ExtCore Documentation',
    u'Dmitry Sikorsky', 'manual'),
 ]
 
@@ -267,7 +267,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'ExtCore', u'ExtCore Framework Documentation',
+    (master_doc, 'ExtCore', u'ExtCore Documentation',
      [author], 1)
 ]
 
