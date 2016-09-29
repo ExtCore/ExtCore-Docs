@@ -16,7 +16,7 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Open project.json file and add dependencies to ExtCore.WebApplication version 1.0.0-beta2 and
+Open project.json file and add dependencies on ExtCore.WebApplication version 1.0.0-beta2 and on
 Microsoft.Extensions.Configuration.Json version 1.0.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
@@ -99,7 +99,7 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_simple/3.png
 
-Open project.json file and add dependencies to ExtCore.Infrastructure version 1.0.0-beta2. After that
+Open project.json file and add dependency on ExtCore.Infrastructure version 1.0.0-beta2. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
@@ -149,7 +149,7 @@ in next way:
       });
     }
 
-If we run our web application we will have following result:
+If we run our web application we will have the following result:
 
 .. image:: /images/tutorial_simple/4.png
 

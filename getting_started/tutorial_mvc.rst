@@ -7,12 +7,14 @@ to create simple ExtCore-based web application first. We will use it as a base.
 
 So, we have the main web application and extension projects. They work but currently don’t
 support MVC. We know that it is quite simple to add MVC support to ASP.NET Core web application
-using extension methods ``AddMvc`` and ``UseMvc``. With ExtCore it is even a bit easier.
+using extension methods ``AddMvc`` and ``UseMvc``. With
+`ExtCore.Mvc <http://docs.extcore.net/en/latest/basic_extensions/extcore_mvc.html>`_ extension
+it is even a bit easier.
 
 Modify Main Web Application
 ---------------------------
 
-Open project.json file and add dependency to ExtCore.Mvc version 1.0.0-beta2. After that
+Open project.json file and add dependency on ExtCore.Mvc version 1.0.0-beta2. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js

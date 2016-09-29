@@ -8,4 +8,3 @@
    tutorial_simple
    tutorial_mvc
    tutorial_data
-   tutorial_extension
