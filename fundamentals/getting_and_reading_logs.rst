@@ -7,6 +7,7 @@ what assemblies have been discovered and loaded, what actions have been executed
 in the ``ConfigureServices`` and ``Configure`` methods etc.
 
 By default ASP.NET Core web application (as well as ExtCore-based one) doesn't have any logger
+configured, so logs are not shown. To configure the logger, you can follow
 `this article <https://docs.asp.net/en/latest/fundamentals/logging.html>`_ or just add next
 line of code in the constructor of your Startup class:
 
