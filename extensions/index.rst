@@ -1,5 +1,5 @@
-﻿Basic Extensions
-================
+﻿Extensions
+==========
 
 .. toctree::
    :titlesonly:
