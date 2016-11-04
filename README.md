@@ -1,1 +1,1 @@
-# Docs for ExtCore 1.0.0-rc1
+# Docs for ExtCore 1.0.0-rc2
