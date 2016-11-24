@@ -14,21 +14,21 @@ it is even a bit easier.
 Modify Main Web Application
 ---------------------------
 
-Open project.json file and add dependency on ExtCore.Mvc version 1.0.0. After that
+Open project.json file and add dependency on ExtCore.Mvc version 1.1.0-beta1. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Mvc": "1.0.0",
-      "ExtCore.WebApplication": "1.0.0",
-      "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-      "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-      "Microsoft.Extensions.Configuration.Json": "1.0.0",
-      "Microsoft.Extensions.Logging.Console": "1.0.0",
+      "ExtCore.Mvc": "1.1.0-beta1",
+      "ExtCore.WebApplication": "1.1.0-beta1",
+      "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+      "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+      "Microsoft.Extensions.Configuration.Json": "1.1.0",
+      "Microsoft.Extensions.Logging.Console": "1.1.0",
       "Microsoft.NETCore.App": {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "type": "platform"
       }
     }
@@ -76,15 +76,15 @@ Modify Extension
 
 First of all, open project.json file and replace dependency on ExtCore.Infrastructure with dependency
 on ExtCore.Mvc.Infrastructure (same version). Then add dependency on Microsoft.AspNetCore.Mvc version
-1.0.0. After that ``dependencies`` section of your project.json file should look like this:
+1.1.0. After that ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2,3
 
     "dependencies": {
-      "ExtCore.Mvc.Infrastructure": "1.0.0",
-      "Microsoft.AspNetCore.Mvc": "1.0.0",
-      "NETStandard.Library": "1.6.0"
+      "ExtCore.Mvc.Infrastructure": "1.1.0-beta1",
+      "Microsoft.AspNetCore.Mvc": "1.1.0",
+      "NETStandard.Library": "1.6.1"
     }
 
 Open Extension.cs file and modify your ``Startup`` class as follows:
