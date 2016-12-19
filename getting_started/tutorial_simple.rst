@@ -16,7 +16,7 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Open project.json file and add dependencies on ExtCore.WebApplication version 1.1.0-beta1 and on
+Open project.json file and add dependencies on ExtCore.WebApplication version 1.1.0 and on
 Microsoft.Extensions.Configuration.Json version 1.1.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
@@ -24,7 +24,7 @@ project.json file should look like this:
     :emphasize-lines: 2,5
 
     "dependencies": {
-      "ExtCore.WebApplication": "1.1.0-beta1",
+      "ExtCore.WebApplication": "1.1.0",
       "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
       "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
       "Microsoft.Extensions.Configuration.Json": "1.1.0",
@@ -99,14 +99,14 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_simple/3.png
 
-Open project.json file and add dependency on ExtCore.Infrastructure version 1.1.0-beta1. After that
+Open project.json file and add dependency on ExtCore.Infrastructure version 1.1.0. After that
 ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Infrastructure": "1.1.0-beta1",
+      "ExtCore.Infrastructure": "1.1.0",
       "NETStandard.Library": "1.6.1"
     }
 

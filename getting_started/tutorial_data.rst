@@ -30,14 +30,14 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_data/1.png
 
-Open project.json file and add dependency on ExtCore.Data.Models.Abstractions version 1.1.0-beta1.
+Open project.json file and add dependency on ExtCore.Data.Models.Abstractions version 1.1.0.
 After that ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Data.Models.Abstractions": "1.1.0-beta1",
+      "ExtCore.Data.Models.Abstractions": "1.1.0",
       "NETStandard.Library": "1.6.1"
     }
 
@@ -73,16 +73,16 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_data/2.png
 
-Open project.json file and add dependencies on ExtCore.Data.Models.Abstractions version 1.1.0-beta1
-and on ExtCoreExtension.Data.Models version 1.1.0-beta1. After that ``dependencies`` section of your
+Open project.json file and add dependencies on ExtCore.Data.Models.Abstractions version 1.1.0
+and on ExtCoreExtension.Data.Models version 1.1.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2,3
 
     "dependencies": {
-      "ExtCore.Data.Abstractions": "1.1.0-beta1",
-      "ExtCoreExtension.Data.Models": "1.1.0-beta1",
+      "ExtCore.Data.Abstractions": "1.1.0",
+      "ExtCoreExtension.Data.Models": "1.1.0",
       "NETStandard.Library": "1.6.1"
     }
 
@@ -103,16 +103,16 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_data/3.png
 
-Open project.json file and add dependencies on ExtCore.Data.Models.Abstractions version 1.1.0-beta1
-and on ExtCoreExtension.Data.Abstractions version 1.1.0-beta1. After that ``dependencies`` section of your
+Open project.json file and add dependencies on ExtCore.Data.Models.Abstractions version 1.1.0
+and on ExtCoreExtension.Data.Abstractions version 1.1.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Data.EntityFramework.Sqlite": "1.1.0-beta1",
-      "ExtCoreExtension.Data.Abstractions": "1.1.0-beta1",
+      "ExtCore.Data.EntityFramework.Sqlite": "1.1.0",
+      "ExtCoreExtension.Data.Abstractions": "1.1.0",
       "NETStandard.Library": "1.6.1"
     }
 
@@ -166,17 +166,17 @@ The second step is to add ``Data:DefaultConnection:ConnectionString`` parameter 
     }
 
 Finally open project.json file and add dependencies on ExtCore.Data.EntityFramework.Sqlite version
-1.1.0-beta1 and on ExtCore.Data version 1.1.0-beta1. After that ``dependencies`` section of your
+1.1.0 and on ExtCore.Data version 1.1.0. After that ``dependencies`` section of your
 project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 2
 
     "dependencies": {
-      "ExtCore.Data": "1.1.0-beta1",
-      "ExtCore.Data.EntityFramework.Sqlite": "1.1.0-beta1",
-      "ExtCore.Mvc": "1.1.0-beta1",
-      "ExtCore.WebApplication": "1.1.0-beta1",
+      "ExtCore.Data": "1.1.0",
+      "ExtCore.Data.EntityFramework.Sqlite": "1.1.0",
+      "ExtCore.Mvc": "1.1.0",
+      "ExtCore.WebApplication": "1.1.0",
       "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
       "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
       "Microsoft.Extensions.Configuration.Json": "1.1.0",
@@ -190,15 +190,15 @@ project.json file should look like this:
 Modify Extension
 ----------------
 
-Open project.json file and add dependency on ExtCoreExtension.Data.Abstractions version 1.1.0-beta1.
+Open project.json file and add dependency on ExtCoreExtension.Data.Abstractions version 1.1.0.
 After that ``dependencies`` section of your project.json file should look like this:
 
 .. code-block:: js
     :emphasize-lines: 3
 
     "dependencies": {
-      "ExtCore.Mvc.Infrastructure": "1.1.0-beta1",
-      "ExtCoreExtension.Data.Abstractions": "1.1.0-beta1",
+      "ExtCore.Mvc.Infrastructure": "1.1.0",
+      "ExtCoreExtension.Data.Abstractions": "1.1.0",
       "Microsoft.AspNetCore.Mvc": "1.1.0",
       "NETStandard.Library": "1.6.1"
     }
