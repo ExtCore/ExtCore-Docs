@@ -156,3 +156,6 @@ If we run our web application we will have the following result:
 It may not look very impressive, but it’s only the beginning! In the next tutorials we will see
 how extensions may execute their own code in ``ConfigureServices`` and ``Configure`` methods, how
 to use MVC and how to work with storage.
+
+You can find the complete source of this sample project on GitHub: 
+`ExtCore Framework 1.1.0 Sample Web Application That Uses a Database <https://github.com/ExtCore/ExtCore-Sample-Data>`_.

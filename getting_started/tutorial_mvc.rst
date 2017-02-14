@@ -194,3 +194,6 @@ Rebuild the solution again and replace ExtCoreExtension.dll file, run the web ap
 
 As we can see, the text turns red. It means that everything works as expected. In the next tutorials
 we will see how to work with the storage.
+
+You can find the complete source of this sample project on GitHub: 
+`ExtCore Framework 1.1.0 Sample MVC Web Application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.

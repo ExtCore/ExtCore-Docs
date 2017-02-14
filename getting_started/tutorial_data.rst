@@ -242,3 +242,6 @@ to the extensions folder of the ExtCoreWebApplication, run the web application:
 .. image:: /images/tutorial_data/4.png
 
 As we can see, data from the database is displayed.
+
+You can find the complete source of this sample project on GitHub: 
+`ExtCore Framework 1.1.0 Sample Web Application That Uses a Database <https://github.com/ExtCore/ExtCore-Sample-Data>`_.
