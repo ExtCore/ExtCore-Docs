@@ -15,3 +15,4 @@ All you need to do to have modular and extendable web application is:
    tutorial_simple
    tutorial_mvc
    tutorial_data
+   tutorial_service
