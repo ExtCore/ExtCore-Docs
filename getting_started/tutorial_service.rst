@@ -102,7 +102,7 @@ Add reference on the Shared project to both of them. After that, create correspo
 
 .. code-block:: c#
 
-    public class PlusOperation
+    public class PlusOperation : IOperation
     {
       public int Calculate(int a, int b)
       {
@@ -112,7 +112,7 @@ Add reference on the Shared project to both of them. After that, create correspo
 
 .. code-block:: c#
 
-    public class MultiplyOperation
+    public class MultiplyOperation : IOperation
     {
       int Calculate(int a, int b)
       {
@@ -176,3 +176,6 @@ So, let’s copy the PlusExtension.dll file to the Extensions folder and try to 
 
 Everything works as expected. We can replace the PlusExtension.dll with the MultiplyExtension.dll, restart the
 web application and the result will change.
+
+You can find the complete source of this sample project on GitHub: 
+`ExtCore Framework 1.1.1 Sample Web Application That Registers a Service Inside the Extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
