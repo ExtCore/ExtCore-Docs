@@ -67,7 +67,29 @@ to find and register an implementation of the ``IStorage`` interface.
 ExtCore doesn’t execute any special logic in this method. It only executes prioritized actions from all the extensions
 here, in a similar way as it is done in the ``ConfigureServices`` method.
 
-This method can be skipped too in order to use the implementation of the base class.
+This method can be skipped too in order to use the implementation of the base class, or you can override it and add
+some custom logic, but don’t forget to call the base method in this case:
+
+.. code-block:: c#
+
+    override void Configure(IApplicationBuilder applicationBuilder)
+    {
+      if (this.serviceProvider.GetService<IHostingEnvironment>().IsDevelopment())
+      {
+        applicationBuilder.UseDeveloperExceptionPage();
+        applicationBuilder.UseDatabaseErrorPage();
+        applicationBuilder.UseBrowserLink();
+      }
+
+      else
+      {
+
+      }
+
+      // Your additional code
+
+      base.Configure(applicationBuilder);
+    }
 
 For example, ExtCore.Mvc extension
 `uses this method <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Mvc/MvcExtension.cs#L45>`_
