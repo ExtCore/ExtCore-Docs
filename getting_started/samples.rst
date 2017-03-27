@@ -11,5 +11,5 @@ Please take a look at our samples on GitHub:
 * `ExtCore Framework 1.1.3 Sample Web Application That Registers a Service Inside the Extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
 
 You can also download our `ready to use full-featured sample <http://extcore.net/files/ExtCore-Sample-1.1.3.zip>`_.
-It contains everything you need to run ExtCore-based web application from Visual Studio 2015, including SQLite
+It contains everything you need to run ExtCore-based web application from Visual Studio 2017, including SQLite
 database with the test data.
