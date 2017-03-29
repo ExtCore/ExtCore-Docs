@@ -1,0 +1,3 @@
+﻿Default Assemblies Provider
+===========================
+

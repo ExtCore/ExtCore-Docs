@@ -1,6 +1,6 @@
 ﻿Debugging ExtCore Extensions
 ============================
 
-To be able to debug an ExtCore extension you need to add direct dependencies to all of its packages to the
-main web application project.json file. When development process is complete, you may remove that direct dependencies
-and use extensions as DLL files.
+To be able to debug an ExtCore extension you need to add the explicit project references to all of its projects
+to the main web application. When development process is complete, you may remove that references and use the
+extension as the DLL files.

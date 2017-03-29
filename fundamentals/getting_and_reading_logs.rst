@@ -11,7 +11,7 @@ Getting Logs
 
 By default ASP.NET Core web application (as well as ExtCore-based one) doesn’t have any logger
 configured, so logs are not shown. To configure the logger, you can follow
-`this article <https://docs.asp.net/en/latest/fundamentals/logging.html>`_ or just add next
+`this article <https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging>`_ or just add next
 line of code in the constructor of your Startup class:
 
 .. code-block:: c#
@@ -74,3 +74,49 @@ It is an excerpt from our sample application log:
 
 Reading Logs
 ------------
+
+Let’s take a look at the log output.
+
+The first 2 lines indicate that the process of the assemblies loading from the specific path has begun. The path is displayed too,
+so you can check it:
+
+.. code-block:: bat
+
+    info: ExtCore.WebApplication.AssemblyProvider[0]
+          Discovering and loading assemblies from path 'C:\SomePath\WebApplication\Extensions'
+
+The first 2 lines show us the path ExtCore tries to discover and load the assemblies from:
+
+The next 2 lines indicate that the process of the assemblies loading from the ``DependencyContext`` has begun:
+
+.. code-block:: bat
+
+    info: ExtCore.WebApplication.AssemblyProvider[0]
+          Discovering and loading assemblies from DependencyContext
+
+Discovered and loaded assemblies are displayed in the both cases.
+
+After the assemblies are discovered and resolved, prioritized actions in ``ConfigureServices`` and ``Configure`` methods
+are executed:
+
+.. code-block:: bat
+
+    info: ExtCore.WebApplication.Startup[0]
+          Executing prioritized ConfigureServices action 'AddStaticFiles' of ExtCore.Mvc.MvcExtension
+    info: ExtCore.WebApplication.Startup[0]
+          Executing prioritized ConfigureServices action '<get_ConfigureServicesActionsByPriorities>b__1_0' of ExtCore.Data.DataExtension
+    info: ExtCore.WebApplication.Startup[0]
+          Executing prioritized ConfigureServices action 'AddMvc' of ExtCore.Mvc.MvcExtension
+    info: ExtCore.WebApplication.Startup[0]
+          Executing prioritized Configure action 'UseStaticFiles' of ExtCore.Mvc.MvcExtension
+    info: ExtCore.WebApplication.Startup[0]
+          Executing prioritized Configure action 'UseMvc' of ExtCore.Mvc.MvcExtension
+    info: ExtCore.Infrastructure.ExtensionBase[0]
+          Executing prioritized UseMvc action '<get_UseMvcActionsByPriorities>b__1_0' of WebApplication.ExtensionA.ExtensionA+<>c
+    info: ExtCore.Infrastructure.ExtensionBase[0]
+          Executing prioritized UseMvc action '<get_UseMvcActionsByPriorities>b__1_0' of WebApplication.ExtensionB.ExtensionB+<>c
+
+The name of the action (if it is not anonymous one) and the extension class are displayed. You can check
+the order of the execution too.
+
+Initialization and startup process is now finished.

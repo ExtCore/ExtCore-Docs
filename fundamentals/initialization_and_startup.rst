@@ -11,6 +11,9 @@ and startup process is implemented by ``Startup`` class and consists of 3 steps:
 Don’t forget to inherit your main web application’s ``Startup`` class from
 ``ExtCore.WebApplication.Startup``.
 
+There is the overloaded constructor that gets the second parameter of the ``IAssemblyProvider`` type.
+It can be used to change the way ExtCore discovers and loads the assemblies (or their location).
+
 Constructor Call
 ----------------
 
