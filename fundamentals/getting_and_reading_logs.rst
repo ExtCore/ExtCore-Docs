@@ -85,8 +85,6 @@ so you can check it:
     info: ExtCore.WebApplication.AssemblyProvider[0]
           Discovering and loading assemblies from path 'C:\SomePath\WebApplication\Extensions'
 
-The first 2 lines show us the path ExtCore tries to discover and load the assemblies from:
-
 The next 2 lines indicate that the process of the assemblies loading from the ``DependencyContext`` has begun:
 
 .. code-block:: bat
