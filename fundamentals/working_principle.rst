@@ -4,7 +4,7 @@
 First of all, ExtCore discovers and loads the assemblies (using the implementation of the
 `IAssemblyProvider <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.WebApplication/IAssemblyProvider.cs#L13>`_ interface).
 When the assemblies are discovered and loaded it caches it inside the
-`ExtensionManager <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Infrastructure/ExtensionManager.cs#L16>` static class.
+`ExtensionManager <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Infrastructure/ExtensionManager.cs#L16>`_ static class.
 This class is the entry point for the ExtCore type discovery mechanism, all extensions can use it to get the information
 about each other.
 
