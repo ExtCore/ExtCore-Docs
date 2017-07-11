@@ -24,6 +24,8 @@ line of code in the constructor of your Startup class:
 
 This approach is used in our sample so you can take a look at it
 `there <https://github.com/ExtCore/ExtCore-Sample/blob/master/src/WebApplication/Startup.cs#L27>`_.
+It is important to do that in the constructor and not in the ``Configure`` method, because otherwise
+you will miss the logs before the ``Configure`` method is called.
 
 It is an excerpt from our sample application log:
 
@@ -130,6 +132,6 @@ are executed:
     info: ExtCore.Mvc[0]
           Executing UseMvc action 'ExtensionB.Actions.UseMvcAction'
 
-It is easy to understand what is going on and what is executed and the check the execution order.
+It is easy to understand what is going on and what is executed and to check the execution order.
 
 Initialization and startup process is now finished.
