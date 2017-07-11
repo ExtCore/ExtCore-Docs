@@ -1,7 +1,7 @@
 ﻿Initialization and Startup
 ==========================
 
-ExtCore initialization and startup process consists of running 2 extension methods:
+ExtCore initialization and startup process consists of running two extension methods:
 ``AddExtCore`` and ``UseExtCore``. These methods must be called inside the ``ConfigureServices`` and ``Configure`` methods
 of the web application’s ``Startup`` class:
 
