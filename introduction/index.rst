@@ -22,7 +22,7 @@ Any module or extension can execute its own code during the web application init
 use priorities to specify the correct order of the calls. This feature might be used for configuration,
 to register services etc.
 
-ExtCore consists of two general packages and two optional basic extensions.
+ExtCore consists of two general packages and four optional basic extensions.
 
 General Packages
 ----------------
@@ -55,14 +55,21 @@ Basic Extensions
 ExtCore basic extensions are:
 
 * ExtCore.Data;
-* ExtCore.Mvc.
+* ExtCore.Data.EntityFramework;
+* ExtCore.Mvc;
+* ExtCore.Events.
 
 ExtCore.Data
 ~~~~~~~~~~~~
 
 By default, ExtCore doesn’t know anything about data and storage, but you can use ExtCore.Data extension to have
-unified approach to working with data and single storage context among all the extensions. Currently it supports
-Microsoft SQL Server, PostgreSql and SQLite, but it is very easy to add another storage support.
+unified approach to working with data and single storage context among all the extensions. Storage might be represented
+by a database, a web API, a file structure or anything else.
+
+ExtCore.Data.EntityFramework
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Currently it supports Microsoft SQL Server, PostgreSql, and SQLite, but it is very easy to add another storage support.
 
 ExtCore.Mvc
 ~~~~~~~~~~~
@@ -70,3 +77,8 @@ ExtCore.Mvc
 By default, ExtCore web applications are not MVC ones. MVC support is provided for them by ExtCore.Mvc extension.
 This extension initializes MVC, makes it possible to use controllers, view components, views (added as resources
 and/or precompiled), static content (added as resources) from other extensions etc.
+
+ExtCore.Events
+~~~~~~~~~~~~~~
+
+It can be used by the extension to notify the code in this or any other extension about some events.

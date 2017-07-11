@@ -1,99 +1,44 @@
 ﻿Initialization and Startup
 ==========================
 
-As any other ASP.NET Core web application, ExtCore-based web application initialization
-and startup process is implemented by ``Startup`` class and consists of 3 steps:
-
-* constructor call;
-* ``ConfigureServices`` method call;
-* ``Configure`` method call.
-
-Don’t forget to inherit your main web application’s ``Startup`` class from
-``ExtCore.WebApplication.Startup``.
-
-There is the overloaded constructor that gets the second parameter of the ``IAssemblyProvider`` type.
-It can be used to change the way ExtCore discovers and loads the assemblies (or their location).
-
-Constructor Call
-----------------
-
-ExtCore-based web application initializes few protected variables in the constructor. Derived
-web application have to initialize ``configurationRoot`` protected variable in its constructor
-in order to provide configuration parameters to ExtCore (these configuration parameters are only
-used during the initialization and startup):
+ExtCore initialization and startup process consists of running 2 extension methods:
+``AddExtCore`` and ``UseExtCore``. These methods must be called inside the ``ConfigureServices`` and ``Configure`` methods
+of the web application’s ``Startup`` class:
 
 .. code-block:: c#
-    :emphasize-lines: 4,10
+    :emphasize-lines: 3,15
 
-    public Startup(IServiceProvider serviceProvider)
-      : base(serviceProvider)
+    public void ConfigureServices(IServiceCollection services)
     {
-      this.serviceProvider.GetService<ILoggerFactory>().AddConsole();
-
-      IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-        .SetBasePath(this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath)
-        .AddJsonFile("config.json", optional: true, reloadOnChange: true);
-
-      this.configurationRoot = configurationBuilder.Build();
+      services.AddExtCore("absolute path to your extensions");
     }
 
-Also, as you can see, we have added console logger here.
-
-``ConfigureServices`` Method Call
----------------------------------
-
-This method is used by ExtCore to discover all the extensions and their assemblies and to cache them
-inside the ``ExtensionManager`` class. After that, ExtCore executes prioritized (defined in a specific order)
-actions (code fragments) from all the extensions, so each extension may execute some code within this method
-using the ``ConfigureServicesActionsByPriorities`` of the ``IExtension`` interface.
-
-You can skip this method and let ExtCore use the default one (defined inside the base ``ExtCore.WebApplication.Startup``
-class), or you can override it and add some custom logic, but don’t forget to call the base method
-in this case:
-
-.. code-block:: c#
-
-    public override void ConfigureServices(IServiceCollection services)
+    public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
     {
-      base.ConfigureServices(services);
-
-      // Your additional code
-    }
-
-For example, ExtCore.Data extension
-`uses this method <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Data/DataExtension.cs#L25>`_
-to find and register an implementation of the ``IStorage`` interface.
-
-``Configure`` Method Call
--------------------------
-
-ExtCore doesn’t execute any special logic in this method. It only executes prioritized actions from all the extensions
-here, in a similar way as it is done in the ``ConfigureServices`` method.
-
-This method can be skipped too in order to use the implementation of the base class, or you can override it and add
-some custom logic, but don’t forget to call the base method in this case:
-
-.. code-block:: c#
-
-    override void Configure(IApplicationBuilder applicationBuilder)
-    {
-      if (this.serviceProvider.GetService<IHostingEnvironment>().IsDevelopment())
+      if (hostingEnvironment.IsDevelopment())
       {
         applicationBuilder.UseDeveloperExceptionPage();
         applicationBuilder.UseDatabaseErrorPage();
         applicationBuilder.UseBrowserLink();
       }
 
-      else
-      {
-
-      }
-
-      // Your additional code
-
-      base.Configure(applicationBuilder);
+      applicationBuilder.UseExtCore();
     }
 
-For example, ExtCore.Mvc extension
-`uses this method <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Mvc/MvcExtension.cs#L45>`_
-to add static files and MVC middleware into the web application pipeline.
+``AddExtCore`` Method
+---------------------
+
+This method discovers and loads the assemblies and caches them into the
+`ExtensionManager <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Infrastructure/ExtensionManager.cs#L15>`_ class.
+Then it `executes code from all the extensions <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.WebApplication/Extensions/ServiceCollectionExtensions.cs#L64>`_
+inside the ``ConfigureServices`` method using the implementations of the
+`IConfigureServicesAction <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Infrastructure/Actions/IConfigureServicesAction.cs#L13>`_
+interface.
+
+``UseExtCore`` Method
+---------------------
+
+This method `executes code from all the extensions <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.WebApplication/Extensions/ApplicationBuilderExtensions.cs#L32>`_
+inside the ``Configure`` method using the implementations of the
+`IConfigureAction <https://github.com/ExtCore/ExtCore/blob/master/src/ExtCore.Infrastructure/Actions/IConfigureAction.cs#L13>`_
+interface.
