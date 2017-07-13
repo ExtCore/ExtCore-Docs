@@ -7,64 +7,45 @@ to create simple ExtCore-based web application first. We will use it as a base.
 
 So, we have the main web application and extension projects. They work but currently don’t
 support MVC. We know that it is quite simple to add MVC support to ASP.NET Core web application
-using extension methods ``AddMvc`` and ``UseMvc``. With
-`ExtCore.Mvc <http://docs.extcore.net/en/latest/basic_extensions/extcore_mvc.html>`_ extension
+using the ``AddMvc`` and ``UseMvc`` extension methods. With the
+`ExtCore.Mvc <http://docs.extcore.net/en/latest/extensions/extcore_mvc.html>`_ extension
 it is even a bit easier.
 
 Modify Main Web Application
 ---------------------------
 
-Open project.json file and add dependency on ExtCore.Mvc version 1.1.0. After that
-``dependencies`` section of your project.json file should look like this:
+Open NuGet Package Manager and add dependency on the ExtCore.Mvc package.
 
-.. code-block:: js
-    :emphasize-lines: 2
+Now open Startup.cs file and remove the ``applicationBuilder.Run`` method calling from the ``Configure one``,
+we don’t need it anymore.
 
-    "dependencies": {
-      "ExtCore.Mvc": "1.1.0",
-      "ExtCore.WebApplication": "1.1.0",
-      "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
-      "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-      "Microsoft.Extensions.Configuration.Json": "1.1.0",
-      "Microsoft.Extensions.Logging.Console": "1.1.0",
-      "Microsoft.NETCore.App": {
-        "version": "1.1.0",
-        "type": "platform"
-      }
-    }
-
-That’s all, there is no second step!
-
-Now open Startup.cs file and remove ``applicationBuilder.Run`` method calling, we don’t need it
-anymore. We could even completely remove methods ``ConfigureServices`` and ``Configure`` because
-they do nothing except calling of parent class ones.
-
-Now your Startup class should look like this:
+Now your ``Startup`` class should look like this:
 
 .. code-block:: c#
 
-    public class Startup : ExtCore.WebApplication.Startup
+    public class Startup
     {
-      public Startup(IServiceProvider serviceProvider)
-        : base (serviceProvider)
-      {
-        this.serviceProvider.GetService<ILoggerFactory>().AddConsole();
+      private string extensionsPath;
 
+      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      {
         IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath)
-          .AddJsonFile("config.json", optional: true, reloadOnChange: true);
+          .SetBasePath(hostingEnvironment.ContentRootPath)
+          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-        this.configurationRoot = configurationBuilder.Build();
+        IConfigurationRoot configurationRoot = configurationBuilder.Build();
+
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
       }
 
-      public override void ConfigureServices(IServiceCollection services)
+      public void ConfigureServices(IServiceCollection services)
       {
-        base.ConfigureServices(services);
+        services.AddExtCore(this.extensionsPath);
       }
 
-      public override void Configure(IApplicationBuilder applicationBuilder)
+      public void Configure(IApplicationBuilder applicationBuilder)
       {
-        base.Configure(applicationBuilder);
+        applicationBuilder.UseExtCore();
       }
     }
 
@@ -74,40 +55,31 @@ It would be too obvious to add it to the main web application, so we will do tha
 Modify Extension
 ----------------
 
-First of all, open project.json file and replace dependency on ExtCore.Infrastructure with dependency
+First of all, replace dependency on ExtCore.Infrastructure with dependency
 on ExtCore.Mvc.Infrastructure (same version). Then add dependency on Microsoft.AspNetCore.Mvc version
-1.1.0. After that ``dependencies`` section of your project.json file should look like this:
+1.1.2. The easiest way to do that is manually edit Extension.csproj file:
 
-.. code-block:: js
+.. code-block:: xml
     :emphasize-lines: 2,3
 
-    "dependencies": {
-      "ExtCore.Mvc.Infrastructure": "1.1.0",
-      "Microsoft.AspNetCore.Mvc": "1.1.0",
-      "NETStandard.Library": "1.6.1"
-    }
+    <ItemGroup>
+      <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="2.0.0-alpha1" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    </ItemGroup>
 
-Open Extension.cs file and modify your ``Startup`` class as follows:
-
-* inherit it from ``ExtCore.Mvc.Infrastructure.ExtensionBase`` instead of ``ExtCore.Infrastructure.ExtensionBase``;
-* remove ``Name`` property (we will use its default implementation);
-* override ``UseMvcActionsByPriorities`` property to add the default route.
-
-``UseMvcActionsByPriorities`` property should look this way:
+Create Actions folder inside the project and create ``UseMvcAction`` class inside it. Actions is ExtCore feature
+that allows extensions to execute some code inside the ``ConfigureServices`` and ``Configure`` methods of the
+web application. This class should look like this:
 
 .. code-block:: c#
 
-    public override IEnumerable<KeyValuePair<int, Action<IRouteBuilder>>> UseMvcActionsByPriorities
+    public class UseMvcAction : IUseMvcAction
     {
-      get
+      public int Priority => 1000;
+
+      public void Execute(IRouteBuilder routeBuilder, IServiceProvider serviceProvider)
       {
-        return new Dictionary<int, Action<IRouteBuilder>>()
-        {
-          [1000] = routeBuilder =>
-          {
-            routeBuilder.MapRoute(name: "Default", template: "{controller}/{action}", defaults: new { controller = "Default", action = "Index" });
-          }
-        };
+        routeBuilder.MapRoute(name: "Default", template: "{controller}/{action}", defaults: new { controller = "Default", action = "Index" });
       }
     }
 
@@ -151,15 +123,17 @@ Index.cshtml:
 
     <h1>Hello From the Extension</h1>
 
-We need to tell the compiler to compile these views as resources to be able to use it later. Open
-project.json file and add ``buildOptions`` section there:
+We need to tell the compiler to compile these views as resources to be able to use it later. Open the
+Extension.csproj file and add following lines there:
 
-.. code-block:: html
+.. code-block:: xml
 
-    "buildOptions": { "embed": [ "Views/**" ] }
+    <ItemGroup>
+      <EmbeddedResource Include="Views\**" />
+    </ItemGroup>
 
-It is enough for now. Rebuild the solution and copy ExtCoreExtension.dll file to the extensions folder
-of the ExtCoreWebApplication. Run the web application:
+It is enough for now. Rebuild the solution and copy Extension.dll file to the extensions folder
+of the WebApplication. Run the web application:
 
 .. image:: /images/tutorial_mvc/1.png
 
@@ -172,12 +146,14 @@ Create default.css file inside the /Styles folder (you need to create it too):
       color: red;
     }
 
-Modify ``buildOptions`` section of your project.json file to tell the compiler to compile the styles
+Modify the Extension.csproj file again to tell the compiler to compile the styles
 too:
 
-.. code-block:: html
+.. code-block:: xml
 
-    "buildOptions": { "embed": [ "Styles/**", "Views/**" ] }
+    <ItemGroup>
+      <EmbeddedResource Include="Styles\**;Views\**" />
+    </ItemGroup>
 
 Finally, add the link to the CSS file to the Index.cshtml view:
 
@@ -196,4 +172,4 @@ As we can see, the text turns red. It means that everything works as expected. I
 we will see how to work with the storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore Framework 1.1.0 Sample MVC Web Application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
+`ExtCore framework 2.0.0-alpha1 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
