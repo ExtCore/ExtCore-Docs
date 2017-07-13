@@ -16,26 +16,22 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Open project.json file and add dependencies on ExtCore.WebApplication version 1.1.0 and on
-Microsoft.Extensions.Configuration.Json version 1.1.0. After that ``dependencies`` section of your
-project.json file should look like this:
+Right click on your project in the Solution Explorer and open NuGet Package Manager. Switch to Browse tab and type
+ExtCore.WebApplication in the Search field (be sure that Include prerelease checkbox is checked).
+Click Install button:
 
-.. code-block:: js
-    :emphasize-lines: 2,5
+.. image:: /images/tutorial_simple/3.png
 
-    "dependencies": {
-      "ExtCore.WebApplication": "1.1.0",
-      "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
-      "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-      "Microsoft.Extensions.Configuration.Json": "1.1.0",
-      "Microsoft.Extensions.Logging.Console": "1.1.0",
-      "Microsoft.NETCore.App": {
-        "version": "1.1.0",
-        "type": "platform"
-      }
-    }
+You can get the same result manually by opening the WebApplication.csproj file and adding next line into it:
 
-Create config.json file in the project root. We will use this file to provide configuration
+.. code-block:: xml
+    :emphasize-lines: 2
+
+    <ItemGroup>
+      <PackageReference Include="ExtCore.WebApplication" Version="2.0.0-alpha1" />
+    </ItemGroup>
+
+Create the appsettings.json file in the project root. We will use this file to provide configuration
 parameters to ExtCore (such as path of the extensions folder). Now it should contain only one
 parameter ``Extensions:Path`` and look like this:
 
@@ -49,66 +45,51 @@ parameter ``Extensions:Path`` and look like this:
       }
     }
 
-Open Startup.cs file and modify your ``Startup`` class as follows:
+Open Startup.cs file. Inside the ``ConfigureServices`` method call ``services.AddExtCore`` one. Pass the extensions
+path as the parameter. Inside the ``Configure`` method call ``applicationBuilder.UseExtCore`` one with no parameters.
 
-* inherit it from ``ExtCore.WebApplication.Startup`` class;
-* add constructor with ``IServiceProvider`` parameter and pass this parameter to the constructor of the parent class;
-* initialize ``configurationRoot`` field of the parent class in the constructor;
-* override ``ConfigureServices`` and ``Configure`` methods and add calls of parent class ones.
-
-Now your Startup class should look like this:
+Now your ``Startup`` class should look like this:
 
 .. code-block:: c#
 
-    public class Startup : ExtCore.WebApplication.Startup
+    public class Startup
     {
-      public Startup(IServiceProvider serviceProvider)
-        : base (serviceProvider)
-      {
-        this.serviceProvider.GetService<ILoggerFactory>().AddConsole();
+      private string extensionsPath;
 
+      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      {
         IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath)
-          .AddJsonFile("config.json", optional: true, reloadOnChange: true);
+          .SetBasePath(hostingEnvironment.ContentRootPath)
+          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-        this.configurationRoot = configurationBuilder.Build();
+        IConfigurationRoot configurationRoot = configurationBuilder.Build();
+
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
       }
 
-      public override void ConfigureServices(IServiceCollection services)
+      public void ConfigureServices(IServiceCollection services)
       {
-        base.ConfigureServices(services);
+        services.AddExtCore(this.extensionsPath);
       }
 
-      public override void Configure(IApplicationBuilder applicationBuilder)
+      public void Configure(IApplicationBuilder applicationBuilder)
       {
-        base.Configure(applicationBuilder);
-        applicationBuilder.Run(async (context) =>
-        {
-          await context.Response.WriteAsync("Hello World!");
-        });
+        applicationBuilder.UseExtCore();
       }
     }
 
-That’s all, you now have ExtCore-based web application. Now we need to create some extension project to
-show how ExtCore types discovering works.
+That’s all, you now have ExtCore-based web application.
+
+Now we need to create some extension project to show how ExtCore types discovering works.
 
 Create Extension
 ----------------
 
 Create new .NET Core class library project:
 
-.. image:: /images/tutorial_simple/3.png
+.. image:: /images/tutorial_simple/4.png
 
-Open project.json file and add dependency on ExtCore.Infrastructure version 1.1.0. After that
-``dependencies`` section of your project.json file should look like this:
-
-.. code-block:: js
-    :emphasize-lines: 2
-
-    "dependencies": {
-      "ExtCore.Infrastructure": "1.1.0",
-      "NETStandard.Library": "1.6.1"
-    }
+Open NuGet Package Manager and add dependency on the ExtCore.Infrastructure package.
 
 Create ``Extension`` class and inherit it from ``ExtCore.Infrastructure.ExtensionBase``. Override
 ``Name`` property in this way:
@@ -130,32 +111,35 @@ Put it Together
 
 We have two options to make our extension available in main web application:
 
-* add direct dependency on ExtCoreExtension in project.json file of ExtCoreWebApplication;
-* put compiled ExtCoreExtension.dll file to extensions folder of the ExtCoreWebApplication that is configured in config.json file.
+* add direct dependency on Extension in the WebApplication;
+* put compiled Extension.dll file to extensions folder of the WebApplication that is configured in appsettings.json file.
 
-While the first option is too obvious let’s try the second one. Copy the ExtCoreExtension.dll file
-to the extensions folder of the ExtCoreWebApplication and modify ``Configure`` method of ``Startup`` class
+While the first option is too obvious let’s try the second one. Copy the Extension.dll file
+to the extensions folder of the WebApplication and modify ``Configure`` method of ``Startup`` class
 in next way:
 
 .. code-block:: c#
     :emphasize-lines: 6
 
-    public override void Configure(IApplicationBuilder applicationBuilder)
+    public void Configure(IApplicationBuilder applicationBuilder)
     {
-      base.Configure(applicationBuilder);
+      applicationBuilder.UseExtCore();
       applicationBuilder.Run(async (context) =>
       {
-        await context.Response.WriteAsync(ExtensionManager.Extensions.First().Name);
+        await context.Response.WriteAsync(ExtensionManager.GetInstance<IExtension>().Name);
       });
     }
 
+It will search for the implementation of the ``IExtension`` interface, create instance of found type,
+and write its ``Name`` property value on every request.
+
 If we run our web application we will have the following result:
 
-.. image:: /images/tutorial_simple/4.png
+.. image:: /images/tutorial_simple/5.png
 
 It may not look very impressive, but it’s only the beginning! In the next tutorials we will see
-how extensions may execute their own code in ``ConfigureServices`` and ``Configure`` methods, how
-to use MVC and how to work with storage.
+how extensions may execute their own code insite the ``ConfigureServices`` and ``Configure`` methods, how
+to use MVC and how to work with a storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore Framework 1.1.0 Sample Web Application That Uses a Database <https://github.com/ExtCore/ExtCore-Sample-Data>`_.
+`ExtCore framework 2.0.0-alpha1 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_.
