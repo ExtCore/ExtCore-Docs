@@ -16,8 +16,8 @@ Modify Main Web Application
 
 Open NuGet Package Manager and add dependency on the ExtCore.Mvc package.
 
-Now open Startup.cs file and remove the ``applicationBuilder.Run`` method calling from the ``Configure one``,
-we don’t need it anymore.
+Now open Startup.cs file and remove the ``applicationBuilder.Run`` method calling from the ``Configure``
+one, we don’t need it anymore.
 
 Now your ``Startup`` class should look like this:
 
