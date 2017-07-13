@@ -75,6 +75,10 @@ Now your ``Startup`` class should look like this:
       public void Configure(IApplicationBuilder applicationBuilder)
       {
         applicationBuilder.UseExtCore();
+        applicationBuilder.Run(async (context) =>
+        {
+          await context.Response.WriteAsync("Hello World!");
+        });
       }
     }
 

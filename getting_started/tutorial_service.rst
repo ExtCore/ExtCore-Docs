@@ -19,13 +19,15 @@ Now let’s start Visual Studio and create new ASP.NET Core project:
 
 Empty project is created.
 
-Now open NuGet manager and add dependency on ExtCore.WebApplicaion package:
+Right click on your project in the Solution Explorer and open NuGet Package Manager. Switch to Browse tab and type
+ExtCore.WebApplication in the Search field (be sure that Include prerelease checkbox is checked).
+Click Install button:
 
 .. image:: /images/tutorial_service/3.png
 
 Also add dependency on Microsoft.Extensions.Configuration.Json package.
 
-Create config.json file in the project root. We will use this file to provide configuration
+Create the appsettings.json file in the project root. We will use this file to provide configuration
 parameters to ExtCore (such as path of the extensions folder). Now it should contain only one
 parameter ``Extensions:Path`` and look like this:
 
@@ -39,39 +41,36 @@ parameter ``Extensions:Path`` and look like this:
       }
     }
 
-Open Startup.cs file and modify your ``Startup`` class as follows:
+Open Startup.cs file. Inside the ``ConfigureServices`` method call ``services.AddExtCore`` one. Pass the extensions
+path as the parameter. Inside the ``Configure`` method call ``applicationBuilder.UseExtCore`` one with no parameters.
 
-* inherit it from ``ExtCore.WebApplication.Startup`` class;
-* add constructor with ``IServiceProvider`` parameter and pass this parameter to the constructor of the parent class;
-* initialize ``configurationRoot`` field of the parent class in the constructor;
-* override ``ConfigureServices`` and ``Configure`` methods and add calls of parent class ones.
-
-Now your Startup class should look like this:
+Now your ``Startup`` class should look like this:
 
 .. code-block:: c#
 
-    public class Startup : ExtCore.WebApplication.Startup
+    public class Startup
     {
-      public Startup(IServiceProvider serviceProvider)
-        : base (serviceProvider)
-      {
-        this.serviceProvider.GetService<ILoggerFactory>().AddConsole();
+      private string extensionsPath;
 
+      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      {
         IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(this.serviceProvider.GetService<IHostingEnvironment>().ContentRootPath)
-          .AddJsonFile("config.json", optional: true, reloadOnChange: true);
+          .SetBasePath(hostingEnvironment.ContentRootPath)
+          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-        this.configurationRoot = configurationBuilder.Build();
+        IConfigurationRoot configurationRoot = configurationBuilder.Build();
+
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
       }
 
-      public override void ConfigureServices(IServiceCollection services)
+      public void ConfigureServices(IServiceCollection services)
       {
-        base.ConfigureServices(services);
+        services.AddExtCore(this.extensionsPath);
       }
 
-      public override void Configure(IApplicationBuilder applicationBuilder)
+      public void Configure(IApplicationBuilder applicationBuilder)
       {
-        base.Configure(applicationBuilder);
+        applicationBuilder.UseExtCore();
         applicationBuilder.Run(async (context) =>
         {
           await context.Response.WriteAsync("Hello World!");
@@ -121,27 +120,19 @@ Add reference on the Shared project to both of them. After that, create correspo
     }
 
 After that each extension needs to register its own implementation of the ``IOperation`` interface inside the
-ASP.NET Core DI. To do that we need to implement the ``IExtension`` interface (it is defined inside the
-ExtCore.Infrastructure package, don’t forget to add the dependency; but it is easier just to inherit your
-extension class from the ``ExtensionBase`` one). This is the example for the PlusExtension extension:
+ASP.NET Core DI. To do that we need to implement the ``IConfigureServicesAction`` interface (it is defined inside the
+ExtCore.Infrastructure package, don’t forget to add the dependency). This is the example for the PlusExtension extension:
 
 .. code-block:: c#
-    :emphasize-lines: 11
+    :emphasize-lines: 7
 
-    public class PlusExtension : ExtensionBase
+    public class AddOperationAction : IConfigureServicesAction
     {
-      public override IEnumerable<KeyValuePair<int, Action<IServiceCollection>>> ConfigureServicesActionsByPriorities
+      public int Priority => 1000;
+
+      public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
       {
-        get
-        {
-          return new Dictionary<int, Action<IServiceCollection>>()
-          {
-            [1000] = services =>
-            {
-              services.AddScoped(typeof(IOperation), typeof(PlusOperation));
-            }
-          };
-        }
+        services.AddScoped(typeof(IOperation), typeof(PlusOperation));
       }
     }
 
@@ -156,19 +147,21 @@ Now modify the ``Configure`` method in next way:
 .. code-block:: c#
     :emphasize-lines: 6
 
-    public override void Configure(IApplicationBuilder applicationBuilder)
+    public void Configure(IApplicationBuilder applicationBuilder, IOperation operation)
     {
-      base.Configure(applicationBuilder);
+      applicationBuilder.UseExtCore();
       applicationBuilder.Run(async (context) =>
-      {
-        await context.Response.WriteAsync(this.serviceProvider.GetService<IOperation>().Calculate(5, 10).ToString());
-      });
+        {
+
+          await context.Response.WriteAsync(operation.Calculate(5, 10).ToString());
+        }
+      );
     }
 
-The service provider will search inside the ASP.NET Core DI for the registered implementation of the
-``IOperation`` interface and return one, which is used to calculate the final value. Our code doesn’t know
-which implementation is used, it is registered by the selected extension. To select the extension we need to
-copy its DLL file to the Extensions folder of the main web application, or add implicit reference on that project.
+The implementation of the ``IOperation`` interface, which is used to calculate the final value, will be provided
+by the ASP.NET Core DI. Our code doesn’t know which implementation is used, it is registered by the selected extension.
+To select the extension we need to copy its DLL file to the Extensions folder of the main web application,
+or add implicit reference on that project.
 
 So, let’s copy the PlusExtension.dll file to the Extensions folder and try to run our application:
 
@@ -178,4 +171,4 @@ Everything works as expected. We can replace the PlusExtension.dll with the Mult
 web application and the result will change.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore Framework 1.1.1 Sample Web Application That Registers a Service Inside the Extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
+`ExtCore framework 2.0.0-alpha1 sample web application that registers a service inside the extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
