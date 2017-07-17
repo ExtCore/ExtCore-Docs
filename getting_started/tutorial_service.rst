@@ -171,4 +171,4 @@ Everything works as expected. We can replace the PlusExtension.dll with the Mult
 web application and the result will change.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 2.0.0-alpha1 sample web application that registers a service inside the extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
+`ExtCore framework 2.0.0 sample web application that registers a service inside the extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.

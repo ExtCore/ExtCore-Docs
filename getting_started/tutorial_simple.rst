@@ -28,7 +28,7 @@ You can get the same result manually by opening the WebApplication.csproj file a
     :emphasize-lines: 2
 
     <ItemGroup>
-      <PackageReference Include="ExtCore.WebApplication" Version="2.0.0-alpha1" />
+      <PackageReference Include="ExtCore.WebApplication" Version="2.0.0" />
     </ItemGroup>
 
 Create the appsettings.json file in the project root. We will use this file to provide configuration
@@ -146,4 +146,4 @@ how extensions may execute their own code insite the ``ConfigureServices`` and `
 to use MVC and how to work with a storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 2.0.0-alpha1 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_.
+`ExtCore framework 2.0.0 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_.
