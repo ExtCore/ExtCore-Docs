@@ -6,8 +6,10 @@ How to Start Using the ExtCore Framework
 
 1. Add dependency on the `ExtCore.WebApplication <https://www.nuget.org/packages/ExtCore.WebApplication/>`_
 NuGet package to your main web application project.
+
 2. Optionally (if your web application uses MVC), add dependency on the `ExtCore.Mvc <https://www.nuget.org/packages/ExtCore.Mvc/>`_
 NuGet package as well.
+
 3. Call the ``services.AddExtCore(extensionsPath)`` extension method inside the ``ConfigureServices`` method of your ``Startup`` class:
 
 .. code-block:: c#
@@ -37,6 +39,7 @@ How to Create an Extension
 --------------------------
 
 1. Create an empty .NET Core class library project.
+
 2. Put some classes, controllers, views, styles, scripts, and any other static content you want there. Views and static content
 must be embedded into the resulting assembly as resources using the following line inside the project file (.csproj):
 
@@ -47,9 +50,11 @@ must be embedded into the resulting assembly as resources using the following li
 
 3. Build your extension project and copy the resulting assembly’s DLL file into the extensions folder of your main
 web application (or you can simply add implicit dependency on the created extension project, or on the NuGet package).
+
 4. If your extension needs to execute some code inside the ``ConfigureServices`` method of the main
 web application’s ``Startup`` class (for example, to register some service inside the DI),
 you can implement the ``ExtCore.Infrastructure.Actions.IConfigureServicesAction`` interface.
+
 5. If your extension needs to execute some code inside the ``Configure`` method of  the main
 web application’s ``Startup`` class (for example, to configure the web application’s request pipeline),
 you can implement the ``ExtCore.Infrastructure.Actions.IConfigureAction`` interface.
