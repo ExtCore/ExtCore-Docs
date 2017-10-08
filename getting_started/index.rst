@@ -71,3 +71,5 @@ when developing your own extensions.
    tutorial_mvc
    tutorial_data
    tutorial_service
+   using_migrations
+   using_identity
