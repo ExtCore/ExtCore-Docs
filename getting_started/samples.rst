@@ -5,6 +5,7 @@ Please take a look at our samples on GitHub:
 
 * `Full-featured ExtCore 3.3.0 framework sample web application <https://github.com/ExtCore/ExtCore-Sample>`_;
 * `ExtCore framework 3.3.0 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_;
+* `ExtCore framework 4.0.0-alpha2 sample web application that uses file storage <https://github.com/ExtCore/ExtCore-Sample-FileStorage>`_;
 * `ExtCore framework 3.3.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_;
 * `ExtCore framework 3.3.0 sample web application that uses a database <https://github.com/ExtCore/ExtCore-Sample-Data>`_;
 * `ExtCore framework 3.3.0 sample web application that uses a Identity <https://github.com/ExtCore/ExtCore-Sample-Identity>`_;
