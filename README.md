@@ -1,1 +1,1 @@
-# Docs for ExtCore 4.0.0-alpha2
+# Docs for ExtCore 4.0.0

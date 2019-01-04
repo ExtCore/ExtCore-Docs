@@ -19,7 +19,6 @@ of the web application’s ``Startup`` class:
       {
         applicationBuilder.UseDeveloperExceptionPage();
         applicationBuilder.UseDatabaseErrorPage();
-        applicationBuilder.UseBrowserLink();
       }
 
       applicationBuilder.UseExtCore();

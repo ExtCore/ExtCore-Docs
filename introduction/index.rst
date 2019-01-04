@@ -54,22 +54,26 @@ Basic Extensions
 
 ExtCore basic extensions are:
 
+* ExtCore.FileStorage;
 * ExtCore.Data;
-* ExtCore.Data.EntityFramework;
 * ExtCore.Mvc;
 * ExtCore.Events.
+
+ExtCore.FileStorage
+~~~~~~~~~~~~~~~~~~~
+
+This extension allows developer to work with a file storage through the abstraction layer and easily replace,
+let's say, file system storage with the Dropbox or Azure Blob Storage ones without changing any code.
 
 ExtCore.Data
 ~~~~~~~~~~~~
 
-By default, ExtCore doesn’t know anything about data and storage, but you can use ExtCore.Data extension to have
-unified approach to working with data and single storage context among all the extensions. Storage might be represented
-by a database, a web API, a file structure or anything else.
+By default, ExtCore doesn’t know anything about data, but you can use ExtCore.Data extension to have
+unified approach to working with data and the single data storage context among all the extensions.
+Data storage might be represented by a database, a web API, a file structure or anything else.
 
-ExtCore.Data.EntityFramework
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Currently it supports Microsoft SQL Server, PostgreSql, and SQLite, but it is very easy to add another storage support.
+Currently ExtCore.Data supports MySQL, PostgreSql, SQLite, and SQL Server with Dapper or Entity Framework Core as ORM.
+You can add your own database or ORM support.
 
 ExtCore.Mvc
 ~~~~~~~~~~~
@@ -77,6 +81,8 @@ ExtCore.Mvc
 By default, ExtCore web applications are not MVC ones. MVC support is provided for them by ExtCore.Mvc extension.
 This extension initializes MVC, makes it possible to use controllers, view components, views (added as resources
 and/or precompiled), static content (added as resources) from other extensions etc.
+
+Also, it allows extension to register custom routes in a specific order.
 
 ExtCore.Events
 ~~~~~~~~~~~~~~
