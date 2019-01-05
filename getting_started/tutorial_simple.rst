@@ -28,7 +28,7 @@ You can get the same result manually by opening the WebApplication.csproj file a
     :emphasize-lines: 2
 
     <ItemGroup>
-      <PackageReference Include="ExtCore.WebApplication" Version="2.0.0" />
+      <PackageReference Include="ExtCore.WebApplication" Version="4.0.0" />
     </ItemGroup>
 
 Create the appsettings.json file in the project root. We will use this file to provide configuration
@@ -56,15 +56,9 @@ Now your ``Startup`` class should look like this:
     {
       private string extensionsPath;
 
-      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      public Startup(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
       {
-        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(hostingEnvironment.ContentRootPath)
-          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        IConfigurationRoot configurationRoot = configurationBuilder.Build();
-
-        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configuration["Extensions:Path"];
       }
 
       public void ConfigureServices(IServiceCollection services)
@@ -146,4 +140,4 @@ how extensions may execute their own code insite the ``ConfigureServices`` and `
 to use MVC and how to work with a storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 2.0.0 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_.
+`ExtCore framework 4.0.0 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_.

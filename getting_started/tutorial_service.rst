@@ -52,15 +52,9 @@ Now your ``Startup`` class should look like this:
     {
       private string extensionsPath;
 
-      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      public Startup(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
       {
-        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(hostingEnvironment.ContentRootPath)
-          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        IConfigurationRoot configurationRoot = configurationBuilder.Build();
-
-        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configuration["Extensions:Path"];
       }
 
       public void ConfigureServices(IServiceCollection services)
@@ -171,4 +165,4 @@ Everything works as expected. We can replace the PlusExtension.dll with the Mult
 web application and the result will change.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 2.0.0 sample web application that registers a service inside the extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.
+`ExtCore framework 4.0.0 sample web application that registers a service inside the extension <https://github.com/ExtCore/ExtCore-Sample-Service>`_.

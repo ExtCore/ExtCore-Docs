@@ -27,15 +27,9 @@ Now your ``Startup`` class should look like this:
     {
       private string extensionsPath;
 
-      public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+      public Startup(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
       {
-        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-          .SetBasePath(hostingEnvironment.ContentRootPath)
-          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        IConfigurationRoot configurationRoot = configurationBuilder.Build();
-
-        this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
+        this.extensionsPath = hostingEnvironment.ContentRootPath + configuration["Extensions:Path"];
       }
 
       public void ConfigureServices(IServiceCollection services)
@@ -56,15 +50,13 @@ Modify Extension
 ----------------
 
 First of all, replace dependency on ExtCore.Infrastructure with dependency
-on ExtCore.Mvc.Infrastructure (same version). Then add dependency on Microsoft.AspNetCore.Mvc version
-1.1.2. The easiest way to do that is manually edit Extension.csproj file:
+on ExtCore.Mvc.Infrastructure (same version). The easiest way to do that is manually edit Extension.csproj file:
 
 .. code-block:: xml
-    :emphasize-lines: 2,3
+    :emphasize-lines: 2
 
     <ItemGroup>
-      <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="2.0.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+      <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
     </ItemGroup>
 
 Create Actions folder inside the project and create ``UseMvcAction`` class inside it. Actions is ExtCore feature
@@ -172,4 +164,4 @@ As we can see, the text turns red. It means that everything works as expected. I
 we will see how to work with the storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 2.0.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
+`ExtCore framework 4.0.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
