@@ -100,7 +100,7 @@ Override ``RegisterEntities`` method in this way:
         {
           etb.HasKey(e => e.Id);
           etb.Property(e => e.Id);
-          etb.ForSqliteToTable("Persons");
+          etb.ToTable("Persons");
         }
       );
     }
