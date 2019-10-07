@@ -24,3 +24,4 @@ Contents
    getting_started/index
    fundamentals/index
    extensions/index
+   migration/index
