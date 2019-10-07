@@ -3,7 +3,7 @@
 
 Please take a look at our samples on GitHub:
 
-* `Full-featured ExtCore 4.0.0 framework sample web application <https://github.com/ExtCore/ExtCore-Sample>`_;
+* `Full-featured ExtCore 5.0.0-alpha1 framework sample web application <https://github.com/ExtCore/ExtCore-Sample>`_;
 * `ExtCore framework 4.0.0 sample simplest web application <https://github.com/ExtCore/ExtCore-Sample-Simplest>`_;
 * `ExtCore framework 4.0.0 sample web application that uses file storage <https://github.com/ExtCore/ExtCore-Sample-FileStorage>`_;
 * `ExtCore framework 4.0.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_;
@@ -16,6 +16,6 @@ Please take a look at our samples on GitHub:
 * `ExtCore framework 4.0.0 sample web application that uses the events <https://github.com/ExtCore/ExtCore-Sample-Events>`_;
 * `ExtCore framework 4.0.0 sample API web application <https://github.com/ExtCore/ExtCore-Sample-Api>`_.
 
-You can also download our `ready to use full-featured sample <http://extcore.net/files/ExtCore-Sample-4.0.0.zip>`_.
-It contains everything you need to run ExtCore-based web application from Visual Studio 2017, including SQLite
+You can also download our `ready to use full-featured sample <http://extcore.net/files/ExtCore-Sample-5.0.0-alpha1.zip>`_.
+It contains everything you need to run ExtCore-based web application from Visual Studio 2019, including SQLite
 database with the test data.
