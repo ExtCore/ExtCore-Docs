@@ -3,7 +3,7 @@
 
 `ExtCore <https://github.com/ExtCore/ExtCore>`_ is free, open source and cross-platform framework for creating
 modular and extendable web applications based on ASP.NET Core. It is built using the best and the most modern
-tools and languages (Visual Studio 2017, C# etc). Join our team!
+tools and languages (Visual Studio 2019, C# etc). Join our team!
 
 ExtCore allows you to build your web applications from the different independent reusable modules or extensions.
 Each of these modules or extensions may consist of one or more ASP.NET Core projects and each of these projects

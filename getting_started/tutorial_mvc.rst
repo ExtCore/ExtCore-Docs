@@ -56,7 +56,7 @@ on ExtCore.Mvc.Infrastructure (same version). The easiest way to do that is manu
     :emphasize-lines: 2
 
     <ItemGroup>
-      <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="4.0.0" />
+      <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="5.0.0" />
     </ItemGroup>
 
 Create Actions folder inside the project and create ``UseMvcAction`` class inside it. Actions is ExtCore feature
@@ -164,4 +164,4 @@ As we can see, the text turns red. It means that everything works as expected. I
 we will see how to work with the storage.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 4.0.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
+`ExtCore framework 5.0.0 sample MVC web application <https://github.com/ExtCore/ExtCore-Sample-Mvc>`_.
