@@ -10,3 +10,4 @@
    getting_and_reading_logs
    default_assembly_provider
    unified_extension_structure
+   authorizations
