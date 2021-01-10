@@ -9,7 +9,7 @@ ExtCore allows you to build your web applications from the different independent
 Each of these modules or extensions may consist of one or more ASP.NET Core projects and each of these projects
 may include everything you want as any other ASP.NET Core project. You don’t need to perform any additional
 actions to make it all work: any ASP.NET Core project can be used as an ExtCore-based web application extension
-by default. Controllers, view components, views (added as resources and/or precompiled), static content (added as
+by default. Controllers, view components, views (precompiled), static content (added as
 resources) are resolved automatically. These projects may be then added to the web application in two ways: as
 direct dependencies (as source code or NuGet packages) or by copying compiled DLLs to the Extensions folder.
 ExtCore supports both of these options out of the box and at the same time.

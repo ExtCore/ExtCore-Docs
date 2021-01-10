@@ -31,7 +31,7 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_data/1.png
 
-Open NuGet Package Manager and add dependency on the ExtCore.Data.Entities.Abstractions version 5.0.0 package
+Open NuGet Package Manager and add dependency on the ExtCore.Data.Entities.Abstractions version 6.0.0 package
 (be sure that Include prerelease checkbox is checked).
 
 Create ``Person`` class that implements ``ExtCore.Data.Entities.Abstractions.IEntity``. Create
@@ -66,7 +66,7 @@ Create new .NET Core class library project:
 
 .. image:: /images/tutorial_data/2.png
 
-Open NuGet Package Manager and add dependency on the ExtCore.Data.Abstractions version 5.0.0 package.
+Open NuGet Package Manager and add dependency on the ExtCore.Data.Abstractions version 6.0.0 package.
 Also add dependency on your local Extension.Data.Entities project.
 
 Create ``IPersonRepository`` interface that implements the ``ExtCore.Data.Abstractions.IRepository`` one.
@@ -86,7 +86,7 @@ Create one more .NET Core class library project:
 
 .. image:: /images/tutorial_data/3.png
 
-Open NuGet Package Manager and add dependency on the ExtCore.Data.EntityFramework.Sqlite version 5.0.0 package.
+Open NuGet Package Manager and add dependency on the ExtCore.Data.EntityFramework.Sqlite version 6.0.0 package.
 Also add dependency on your local Extension.Data.Abstractions project.
 
 Create ``EntityRegistrar`` class that implements the ``ExtCore.Data.EntityFramework.IEntityRegistrar`` interface.
@@ -139,8 +139,8 @@ The second step is to add ``ConnectionStrings:Default`` parameter to the appsett
       "Default": "Data Source=..\\..\\..\\db.sqlite"
     }
 
-Finally, open NuGet Package Manager and add dependencies on the ExtCore.Data version 5.0.0 and
-ExtCore.Data.EntityFramework.Sqlite version 5.0.0 packages.
+Finally, open NuGet Package Manager and add dependencies on the ExtCore.Data version 6.0.0 and
+ExtCore.Data.EntityFramework.Sqlite version 6.0.0 packages.
 
 Modify Extension
 ----------------
@@ -187,4 +187,4 @@ and Extension.Data.EntityFramework.Sqlite.dll to the extensions folder of the We
 As we can see, data from the database is displayed.
 
 You can find the complete source of this sample project on GitHub: 
-`ExtCore framework 5.0.0 sample web application that uses a database <https://github.com/ExtCore/ExtCore-Sample-Data>`_.
+`ExtCore framework 6.0.0 sample web application that uses a database <https://github.com/ExtCore/ExtCore-Sample-Data>`_.

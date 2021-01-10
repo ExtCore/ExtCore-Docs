@@ -1,1 +1,1 @@
-# Docs for ExtCore 5.0.0
+# Docs for ExtCore 6.0.0

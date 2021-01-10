@@ -38,15 +38,15 @@ about something important.
 How to Create an Extension
 --------------------------
 
-1. Create an empty .NET Core class library project.
+1. Create an empty .NET Razor class library project.
 
-2. Put some classes, controllers, views, styles, scripts, and any other static content you want there. Views and static content
+2. Put some classes, controllers, views, styles, scripts, and any other static content you want there. Static content
 must be embedded into the resulting assembly as resources using the following line inside the project file (.csproj):
 
 .. code-block:: xml
     :emphasize-lines: 1
 
-    <EmbeddedResource Include="Views\**;Styles\**;Scripts\**" />
+    <EmbeddedResource Include="Styles\**;Scripts\**" />
 
 3. Build your extension project and copy the resulting assembly’s DLL file into the extensions folder of your main
 web application (or you can simply add implicit dependency on the created extension project, or on the NuGet package).
