@@ -59,19 +59,19 @@ on ExtCore.Mvc.Infrastructure (same version). The easiest way to do that is manu
       <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="6.0.0" />
     </ItemGroup>
 
-Create Actions folder inside the project and create ``UseMvcAction`` class inside it. Actions is ExtCore feature
+Create Actions folder inside the project and create ``UseEndpointAction`` class inside it. Actions is ExtCore feature
 that allows extensions to execute some code inside the ``ConfigureServices`` and ``Configure`` methods of the
 web application. This class should look like this:
 
 .. code-block:: c#
 
-    public class UseMvcAction : IUseMvcAction
+    public class UseEndpointAciton : IUseEndpointsAction
     {
       public int Priority => 1000;
 
-      public void Execute(IRouteBuilder routeBuilder, IServiceProvider serviceProvider)
+      public void Execute(IEndpointRouteBuilder endpointRouteBuilder, IServiceProvider serviceProvider)
       {
-        routeBuilder.MapRoute(name: "Default", template: "{controller}/{action}", defaults: new { controller = "Default", action = "Index" });
+        endpointRouteBuilder.MapControllerRoute(name: "Default", pattern: "{controller}/{action}", defaults: new { controller = "Default", action = "Index" });
       }
     }
 
